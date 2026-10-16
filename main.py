@@ -19,6 +19,7 @@ tictactoe = {
 
 # variables
 game_over = False
+x_player = True
 
 # ---------- function to create the grid ----------
 def create_grid(dict):
@@ -58,19 +59,31 @@ print(f"""\n{starting_grid}""")
 
 # starting the game
 while game_over is False:
+  # get current player
+  print("x player", x_player)
+
   # ask player which position they want to put their X or O in
-  player_input = input("Where would you like to put your letter?: ").lower()
+  player_input = input(f"{'Player 1 (X),' if x_player else 'Player 2 (O),'} where would you like to go?: ").lower()
   # tictactoe["a1"] = player
-  print("player input:", player_input)
+  # print("player input:", player_input)
 
   # check input
   grid_options = ["a1", "a2", "a3", "b1", "b2", "b3", "c1", "c2", "c3"]
 
-  if player_input in grid_options:
+
+  if player_input in grid_options and tictactoe[player_input] == " ":
+    # put player selection
     print("it's there!")
-    tictactoe[player_input] = "X"
+
+    if x_player:
+      tictactoe[player_input] = "X"
+    else:
+      tictactoe[player_input] = "O"
+
+    # then change to other player
+    x_player = not x_player
   else:
-    print("enter a valid location.")
+    print("Enter a valid location.")
 
 
   # ---------- show the filled out grid ----------
