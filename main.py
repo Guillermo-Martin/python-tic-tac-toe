@@ -58,9 +58,20 @@ print(f"""\n{starting_grid}""")
 
 # starting the game
 while game_over is False:
-  player = input("What is your letter? ")
-  tictactoe["a1"] = player
-  print(player)
+  # ask player which position they want to put their X or O in
+  player_input = input("Where would you like to put your letter?: ").lower()
+  # tictactoe["a1"] = player
+  print("player input:", player_input)
+
+  # check input
+  grid_options = ["a1", "a2", "a3", "b1", "b2", "b3", "c1", "c2", "c3"]
+
+  if player_input in grid_options:
+    print("it's there!")
+    tictactoe[player_input] = "X"
+  else:
+    print("enter a valid location.")
+
 
   # ---------- show the filled out grid ----------
   full_grid = create_grid(tictactoe)
