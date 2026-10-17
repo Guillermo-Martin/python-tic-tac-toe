@@ -64,8 +64,6 @@ while game_over is False:
 
   # ask player which position they want to put their X or O in
   player_input = input(f"{'Player 1 (X),' if x_player else 'Player 2 (O),'} where would you like to go?: ").lower()
-  # tictactoe["a1"] = player
-  # print("player input:", player_input)
 
   # check input
   grid_options = ["a1", "a2", "a3", "b1", "b2", "b3", "c1", "c2", "c3"]
@@ -73,8 +71,6 @@ while game_over is False:
 
   if player_input in grid_options and tictactoe[player_input] == " ":
     # put player selection
-    print("it's there!")
-
     if x_player:
       tictactoe[player_input] = "X"
     else:
@@ -91,3 +87,35 @@ while game_over is False:
 
   # show tic tac toe board
   print(f"""\n{full_grid}""")
+
+
+  # ----------------------
+  # these are the winning combinations
+  winning_combinations = [
+    ["a1", "a2", "a3"],
+    ["b1", "b2", "b3"],
+    ["c1", "c2", "c3"],
+    ["a1", "b1", "c1"],
+    ["a2", "b2", "c2"],
+    ["a3", "b3", "c3"],
+    ["a1", "b2", "c3"],
+    ["a3", "b2", "c1"],
+  ]
+
+  # loop through each of these combinations and check to see if they exist in the dictionary
+  for combo in winning_combinations:
+    if game_over == False:
+      x_total = 0
+      o_total = 0
+
+      # check to see that each cell contains an X or an O and NOT a " "
+      for cell in combo:
+        if tictactoe[cell] == "X":
+          x_total += 1
+        elif tictactoe[cell] == "O":
+          o_total += 1
+
+      if x_total == 3 or o_total == 3:
+        print(f"{'Player 2 (O),' if x_player else 'Player 1 (X),'} wins!")
+        game_over = True
+  
